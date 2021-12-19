@@ -1,0 +1,24 @@
+ul {
+    list-style-type: none;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(43, 61, 226);
+}
+
+h1 {
+    padding-top: 1rem;
+}
+
+.main {
+    height: 25vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
