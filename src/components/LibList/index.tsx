@@ -20,20 +20,21 @@ export function LibList() {
     const [books, setBooks] = useState<Books[]>([]);
     const [input, setInput] = useState('');
     const[showMessage, setShowMessage] = useState(false);
-    const[inputMessageError, setInputMessageError] = useState('');
 
 
     const handleSearch = () => {
         let value = input.toLowerCase();
 
         if(!value){
-            setInputMessageError("Digite um autor");
-            return
+            api.get('/search')
+            .then(response => { 
+                setBooks(response.data.hits)
+            })
+            .catch((err) => {
+                console.error("ops! ocorreu um erro" + err);
+              });              
         }
 
-        setInputMessageError('');
-        
-       
         api.get(`search?query=${value}&tags=(story,author)`)
         .then(response => { 
             setBooks(response.data.hits)
@@ -59,8 +60,7 @@ export function LibList() {
                     label="Busque por autor ou livro" 
                     variant="outlined"  
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) =>  setInput(event.target.value)}
-                    error={!!inputMessageError}
-                    helperText={inputMessageError}/>
+                    />
                 </div>
 
                 <div>
